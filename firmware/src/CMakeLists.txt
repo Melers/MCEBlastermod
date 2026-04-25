@@ -18,7 +18,7 @@ cmake_minimum_required(VERSION 3.13)
 #                      VREG_VOLTAGE_1_30 1.30v
 
 #
-# This will place the firmware into: build/MCEBlaster.uf2
+# This will place the firmware into: build/MCEBlaster_<VERSION>_pico1.uf2
 #
 # For example: minicom -b 115200 -D /dev/ttyACM0. Serial connection: 115200 8N1
 
@@ -37,14 +37,22 @@ include(pico_sdk_import.cmake)
 if (PICO_BOARD STREQUAL "pico")
   set(NAME_SUFFIX pico1)
   set(PICO1 1)
+elseif (PICO_BOARD STREQUAL "pico_w")
+  set(NAME_SUFFIX pico1_w)
+  set(PICO1 1)
+  set(PICO_WIRELESS 1)
 elseif (PICO_BOARD STREQUAL "pico2")
   set(PICO2 1)
   set(NAME_SUFFIX pico2)
+elseif (PICO_BOARD STREQUAL "pico2_w")
+  set(PICO2 1)
+  set(NAME_SUFFIX pico2_w)
+  set(PICO_WIRELESS 1)
 else ()
-  message(FATAL ERROR "ERROR: Please define -DPICO_BOARD pico1 or pico2")
+  message(FATAL_ERROR "ERROR: Please define -DPICO_BOARD pico, pico_w, pico2 or pico2_w")
 endif ()
 
-set(PROJECT_NAME "MCEBlaster_${NAME_SUFFIX}")
+set(PROJECT_NAME "MCEBlaster_${REVISION_MAJOR}_${REVISION_MINOR}_${REVISION_PATCH}_${NAME_SUFFIX}")
 project(
   ${PROJECT_NAME}
   LANGUAGES C CXX ASM)
