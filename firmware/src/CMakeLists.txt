@@ -68,7 +68,7 @@ include_directories("${PICO_SDK_PATH}/src/rp2_common/hardware_flash/include")
 include_directories("${PICO_SDK_PATH}/src/rp2_common/pico_multicore/include")
 include_directories("${PROJECT_BINARY_DIR}/") # for build/config.h
 
-set(CMAKE_CXX_FLAGS_RELEASE "-O3 -ffast-math -Wall -Werror")
+set(CMAKE_CXX_FLAGS_RELEASE "-O2 -ffast-math -Wall -Werror")
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wall -Werror ${EXTRA_DBG_FLAGS}")
 
 # rest of your project
